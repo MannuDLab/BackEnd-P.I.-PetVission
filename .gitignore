@@ -1,0 +1,157 @@
+HELP.md
+target/
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+# ============================================
+# PETVISSION — .gitignore
+# Java 21 + Spring Boot + Maven + PostgreSQL
+# ============================================
+
+# ============================================
+# MAVEN
+# ============================================
+!.mvn/wrapper/maven-wrapper.jar
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.properties
+
+# ============================================
+# SPRING BOOT
+# ============================================
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+spring-shell.log
+
+# ============================================
+# VARIABLES DE ENTORNO — NUNCA SUBIR AL REPO
+# ============================================
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+*.env
+application-local.properties
+application-secret.properties
+application-prod.properties
+
+# ============================================
+# INTELLIJ IDEA
+# ============================================
+.idea/
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+# ============================================
+# VS CODE
+# ============================================
+*.code-workspace
+.history/
+
+# ============================================
+# SISTEMA OPERATIVO
+# ============================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+.fseventsd
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+*~
+
+# ============================================
+# LOGS
+# ============================================
+*.log
+logs/
+log/
+
+# ============================================
+# BASE DE DATOS LOCAL
+# ============================================
+*.sql.backup
+*.dump
+*.db
+*.sqlite
+*.h2.db
+*.mv.db
+*.trace.db
+
+# ============================================
+# ARCHIVOS TEMPORALES
+# ============================================
+*.tmp
+*.temp
+*.swp
+*.swo
+.cache/
+tmp/
+temp/
+
+# ============================================
+# UPLOADS Y ARCHIVOS GENERADOS
+# ============================================
+uploads/
+static/uploads/
+src/main/resources/static/uploads/
+
+# ============================================
+# DOCKER (si se agrega después)
+# ============================================
+.docker/
+docker-compose.override.yml

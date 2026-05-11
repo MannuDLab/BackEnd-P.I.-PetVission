@@ -146,62 +146,6 @@ src/main/java/com/petvission/
 │   └── service/
 │       └── AtencionService.java
 │
-├── producto/
-│   ├── controller/
-│   │   └── ProductoController.java
-│   ├── dto/
-│   │   ├── ProductoRequestDto.java
-│   │   └── ProductoResponseDto.java
-│   ├── mapper/
-│   │   └── ProductoMapper.java
-│   ├── model/
-│   │   ├── Producto.java
-│   │   └── Categoria.java
-│   ├── repository/
-│   │   ├── ProductoRepository.java
-│   │   └── CategoriaRepository.java
-│   └── service/
-│       └── ProductoService.java
-│
-├── pedido/
-│   ├── controller/
-│   │   └── PedidoController.java
-│   ├── dto/
-│   │   ├── PedidoRequestDto.java
-│   │   ├── PedidoResponseDto.java
-│   │   ├── DetallePedidoRequestDto.java
-│   │   └── DetallePedidoResponseDto.java
-│   ├── mapper/
-│   │   └── PedidoMapper.java
-│   ├── model/
-│   │   ├── Pedido.java
-│   │   └── DetallePedido.java
-│   ├── repository/
-│   │   ├── PedidoRepository.java
-│   │   └── DetallePedidoRepository.java
-│   └── service/
-│       └── PedidoService.java
-│
-├── pago/
-│   ├── controller/
-│   │   └── PagoController.java
-│   ├── dto/
-│   │   ├── PagoRequestDto.java
-│   │   ├── PagoResponseDto.java
-│   │   └── BoletaResponseDto.java
-│   ├── mapper/
-│   │   └── PagoMapper.java
-│   ├── model/
-│   │   ├── Pago.java
-│   │   ├── MetodoPago.java
-│   │   └── Boleta.java
-│   ├── repository/
-│   │   ├── PagoRepository.java
-│   │   ├── MetodoPagoRepository.java
-│   │   └── BoletaRepository.java
-│   └── service/
-│       └── PagoService.java
-│
 └── shared/
     ├── exception/
     │   ├── GlobalExceptionHandler.java
@@ -215,7 +159,7 @@ src/main/java/com/petvission/
 
 ---
 
-## 📡 Endpoints principales
+## 📡 Endpoints
 
 ### Auth — Público
 | Método | Ruta | Descripción |
@@ -232,13 +176,6 @@ src/main/java/com/petvission/
 | GET | /api/citas/veterinario/{id} | Agenda del veterinario |
 | GET | /api/atenciones/cita/{id} | Atención de una cita |
 | GET | /api/historial/mascota/{id} | Historial de una mascota |
-
-### E-commerce — Requiere JWT
-| Método | Ruta | Descripción |
-|---|---|---|
-| GET | /api/productos | Listar productos |
-| GET | /api/pedidos/usuario/{id} | Pedidos de un usuario |
-| GET | /api/pagos/usuario/{id} | Pagos de un usuario |
 
 ### Sistema
 | Método | Ruta | Descripción |

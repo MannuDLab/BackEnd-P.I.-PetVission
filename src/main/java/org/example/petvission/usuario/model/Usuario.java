@@ -22,14 +22,21 @@ public class Usuario {
 
     private String password;
 
+    private String rol;
+
+    private String tel;
+
     public Usuario() {}
 
     public Usuario(String name, String email, String password) {
         this.name = name;
         this.email = email;
         this.password = password;
+        this.rol = rol;
+        this.tel = tel;
     }
 
+    // GETTERS:
     public Long getId() { return id; }
 
     public String getEmail() { return email; }
@@ -40,4 +47,12 @@ public class Usuario {
 
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
+
+    public String getRol() { return rol; }
+    public void setRol(String rol) { this.rol = rol; }
+
+    public String getTel() { return tel; }
+    public void setTel(String tel) { this.tel = tel; }
+
+
 }

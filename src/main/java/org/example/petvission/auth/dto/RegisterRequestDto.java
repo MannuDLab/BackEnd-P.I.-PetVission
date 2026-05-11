@@ -30,6 +30,6 @@ public class RegisterRequestDto {
     private String telefono;
 
     @NotNull(message = "El rol es obligatorio")
-    private nombreRol rol;
+    private String rol;
     // Valores válidos: CLIENTE, VETERINARIO, ADMINISTRADOR
 }

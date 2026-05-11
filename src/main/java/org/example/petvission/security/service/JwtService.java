@@ -10,7 +10,7 @@ import java.util.Date;
 @Service
 public class JwtService {
 
-    @Value("${JWT_SECRET}") // Esto lee la clave de tu archivo .env
+    @Value("${jwt.secret}")
     private String secretKey;
 //Servicio encargado de la lógica criptográfica de los JSON Web Tokens.
 

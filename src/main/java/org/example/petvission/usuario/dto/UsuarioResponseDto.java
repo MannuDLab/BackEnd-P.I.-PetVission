@@ -18,8 +18,8 @@ public class UsuarioResponseDto {
 
     private Long idUsuario;
     private String nombre;
-    private String apellido;
     private String correo;
+    private String pass;
     private String telefono;
     private String rol;
 

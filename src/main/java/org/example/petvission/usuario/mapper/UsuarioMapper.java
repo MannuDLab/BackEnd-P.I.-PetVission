@@ -21,13 +21,14 @@ public class UsuarioMapper {
     public static UsuarioResponseDto toDto(Usuario usuario) {
 
         return UsuarioResponseDto.builder()
-                .idUsuario(usuario.getIdUsuario())
-                .nombre(usuario.getNombre())
-                .apellido(usuario.getApellido())
-                .correo(usuario.getCorreo())
-                .telefono(usuario.getTelefono())
-                .rol(usuario.getRol().getNombreRol())
+                .idUsuario(usuario.getId())
+                .nombre(usuario.getName())
+                .correo(usuario.getEmail())
+                .pass(usuario.getPassword())
+                .telefono(usuario.getTel())
+                .rol(usuario.getRol())
                 .build();
+
     }
 
 }

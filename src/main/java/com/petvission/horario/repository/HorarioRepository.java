@@ -11,10 +11,9 @@ import java.util.List;
 @Repository
 public interface HorarioRepository
         extends JpaRepository<Horario, Long> {
+    List<Horario> findByVeterinario_IdUsuario(Long idVeterinario);
 
-    List<Horario> findByVeterinario(
-            UsuarioVeterinario veterinario
-    );
+    List<Horario> findByVeterinario_IdUsuarioAndDisponibleTrue(Long idVeterinario);
 
     List<Horario> findByFecha(LocalDate fecha);
 

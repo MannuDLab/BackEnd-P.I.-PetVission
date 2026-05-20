@@ -59,6 +59,11 @@ public class CitaService {
     /*
      * CANCELAR CITA
      */
+    // se modifica para que tenga compatibilidad con el dato que devuelve el controller
+    // cancelarCita y reprogramarCita en el service devuelven Cita (la entidad), pero el controller
+    // ahora espera CitaUsuarioDt. La solución más limpia es modificar ambos métodos en el service
+    // para que devuelvan CitaUsuarioDto usando el mapper que ya existe.
+    /*
     public Cita cancelarCita(Long idCita) {
 
         Cita cita = citaRepository.findById(idCita)
@@ -72,10 +77,35 @@ public class CitaService {
 
         return citaRepository.save(cita);
     }
+*/
+    /*
+     * CANCELAR CITA
+     */
+    public CitaUsuarioDto cancelarCita(Long idCita) {
+        Cita cita = citaRepository.findById(idCita)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Cita no encontrada")
+                );
 
+        cita.setEstado(EstadoCita.CANCELADA);
+        Cita saved = citaRepository.save(cita);
+
+        return CitaUsuarioDto.builder()
+                .idCita(saved.getIdCita())
+                .nombreCliente(saved.getUsuario().getNombres())
+                .nombreVeterinario(saved.getVeterinario().getUsuario().getNombres())
+                .fecha(saved.getFecha())
+                .hora(saved.getHora())
+                .estado(saved.getEstado())
+                .motivo(saved.getMotivo())
+                .build();
+    }
     /*
      * REPROGRAMAR CITA
      */
+    // esta función también se ve afectada
+    // por el mismo sintoma, como el controller devolvia un dto generico le faltaba informacion
+    /*
     public Cita reprogramarCita(
             Long idCita,
             ReprogramarCitaDto dto
@@ -96,7 +126,31 @@ public class CitaService {
 
         return citaRepository.save(cita);
     }
+    */
+    /*
+     * REPROGRAMAR CITA
+     */
+    public CitaUsuarioDto reprogramarCita(Long idCita, ReprogramarCitaDto dto) {
+        Cita cita = citaRepository.findById(idCita)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Cita no encontrada")
+                );
 
+        cita.setFecha(dto.getNuevaFecha());
+        cita.setHora(dto.getNuevaHora());
+        cita.setEstado(EstadoCita.REPROGRAMADA);
+        Cita saved = citaRepository.save(cita);
+
+        return CitaUsuarioDto.builder()
+                .idCita(saved.getIdCita())
+                .nombreCliente(saved.getUsuario().getNombres())
+                .nombreVeterinario(saved.getVeterinario().getUsuario().getNombres())
+                .fecha(saved.getFecha())
+                .hora(saved.getHora())
+                .estado(saved.getEstado())
+                .motivo(saved.getMotivo())
+                .build();
+    }
     /*
      * OBTENER AGENDA GENERAL
      */

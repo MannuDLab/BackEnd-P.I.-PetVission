@@ -16,6 +16,7 @@ import com.petvission.cita.dto.CitaResponseDto;
 import com.petvission.cita.mapper.CitaMapper;
 import com.petvission.usuario.model.Usuario;
 import com.petvission.usuario.repository.UsuarioRepository;
+import com.petvission.horario.repository.HorarioRepository;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -32,6 +33,8 @@ public class CitaService {
 
     private final UsuarioRepository usuarioRepository;
     private final CitaMapper citaMapper;
+
+    private final HorarioRepository horarioRepository;
 
     /*
      * AGENDAR CITA
@@ -247,9 +250,7 @@ public class CitaService {
     /*
      * AGENDAR CITA CON DTO
      */
-    public CitaResponseDto agendarCitaDto(
-            CitaRequestDto dto
-    ) {
+    public CitaResponseDto agendarCitaDto(CitaRequestDto dto) {
         Usuario usuario = usuarioRepository.findById(dto.getIdUsuario())
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado"));
 
@@ -272,6 +273,17 @@ public class CitaService {
                 .motivo(dto.getMotivo())
                 .estado(EstadoCita.PENDIENTE)
                 .build();
+
+        // marcar el horario como no disponible
+        horarioRepository
+                .findByVeterinario_IdUsuarioAndDisponibleTrue(dto.getIdVeterinario())
+                .stream()
+                .filter(h -> h.getFecha().equals(dto.getFecha()) && h.getHora().equals(dto.getHora()))
+                .findFirst()
+                .ifPresent(h -> {
+                    h.setDisponible(false);
+                    horarioRepository.save(h);
+                });
 
         return citaMapper.toDto(citaRepository.save(cita));
     }

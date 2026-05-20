@@ -1,25 +1,19 @@
 package com.petvission.horario.dto;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 @Builder
-
-public class HorarioDto {
+public class HorarioResponseDto {
 
     private Long id;
-
     private LocalDate fecha;
-
     private LocalTime hora;
-
-    private String nombreVeterinario;
-
     private Boolean disponible;
+    private Long idVeterinario;
+    private String nombreVeterinario;
 }

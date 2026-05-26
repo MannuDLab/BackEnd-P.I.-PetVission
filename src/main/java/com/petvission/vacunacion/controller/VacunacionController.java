@@ -1,6 +1,8 @@
 package com.petvission.vacunacion.controller;
 
+import com.petvission.shared.response.ApiResponse;
 import com.petvission.vacunacion.dto.VacunacionRequestDto;
+import com.petvission.vacunacion.dto.VacunacionResponseDto;
 import com.petvission.vacunacion.service.VacunacionService;
 
 import lombok.RequiredArgsConstructor;
@@ -20,12 +22,11 @@ public class VacunacionController {
      * REGISTRAR VACUNACIÓN
      */
     @PostMapping
-    public ResponseEntity<?> registrarVacunacion(
+    public ResponseEntity<ApiResponse<VacunacionResponseDto>> registrarVacunacion(
             @RequestBody VacunacionRequestDto dto
     ) {
-
         return ResponseEntity.ok(
-                vacunacionService.registrarVacunacion(dto)
+                ApiResponse.success(vacunacionService.registrarVacunacion(dto))
         );
     }
 }

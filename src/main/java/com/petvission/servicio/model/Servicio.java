@@ -27,7 +27,7 @@ public class Servicio {
      * CATEGORÍA DEL SERVICIO (clínico / no clínico)
      */
     @Column(nullable = false, length = 50)
-    private String categoria;
+    private CategoriaServicio categoria;
 
     /*
      * DESCRIPCIÓN DETALLADA DEL SERVICIO

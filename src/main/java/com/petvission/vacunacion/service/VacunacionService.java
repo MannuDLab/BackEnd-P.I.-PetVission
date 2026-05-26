@@ -1,23 +1,20 @@
 package com.petvission.vacunacion.service;
 
-import com.petvission.atencion.model.Atencion;
-import com.petvission.atencion.repository.AtencionRepository;
-
+import com.petvission.historialClinico.model.HistorialClinico;
+import com.petvission.historialClinico.repository.HistorialClinicoRepository;
 import com.petvission.mascota.model.Mascota;
 import com.petvission.mascota.repository.MascotaRepository;
-
 import com.petvission.shared.exception.ResourceNotFoundException;
-
+import com.petvission.usuario.model.UsuarioVeterinario;
+import com.petvission.usuario.repository.UsuarioVeterinarioRepository;
 import com.petvission.vacunacion.dto.VacunacionRequestDto;
-
+import com.petvission.vacunacion.dto.VacunacionResponseDto;
+import com.petvission.vacunacion.mapper.VacunacionMapper;
 import com.petvission.vacunacion.model.VacunaCatalogo;
 import com.petvission.vacunacion.model.Vacunacion;
-
 import com.petvission.vacunacion.repository.VacunaCatalogoRepository;
 import com.petvission.vacunacion.repository.VacunacionRepository;
-
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.stereotype.Service;
 
 @Service
@@ -25,52 +22,46 @@ import org.springframework.stereotype.Service;
 public class VacunacionService {
 
     private final VacunacionRepository vacunacionRepository;
-
     private final VacunaCatalogoRepository vacunaCatalogoRepository;
-
     private final MascotaRepository mascotaRepository;
-
-    private final AtencionRepository atencionRepository;
+    private final HistorialClinicoRepository historialClinicoRepository; // ← minúscula
+    private final UsuarioVeterinarioRepository usuarioVeterinarioRepository;
 
     /*
      * REGISTRAR VACUNACIÓN
      */
-    public Vacunacion registrarVacunacion(
-            VacunacionRequestDto dto
-    ) {
+    public VacunacionResponseDto registrarVacunacion(VacunacionRequestDto dto) {
 
-        Mascota mascota =
-                mascotaRepository.findById(dto.getIdMascota())
-                        .orElseThrow(() ->
-                                new ResourceNotFoundException(
-                                        "Mascota no encontrada"
-                                )
-                        );
+        Mascota mascota = mascotaRepository.findById(dto.getIdMascota())
+                .orElseThrow(() -> new ResourceNotFoundException("Mascota no encontrada"));
 
-        VacunaCatalogo vacuna =
-                vacunaCatalogoRepository.findById(dto.getIdVacuna())
-                        .orElseThrow(() ->
-                                new ResourceNotFoundException(
-                                        "Vacuna no encontrada"
-                                )
-                        );
+        VacunaCatalogo vacuna = vacunaCatalogoRepository.findById(dto.getIdVacuna())
+                .orElseThrow(() -> new ResourceNotFoundException("Vacuna no encontrada"));
 
-        Atencion atencion =
-                atencionRepository.findById(dto.getIdAtencion())
-                        .orElseThrow(() ->
-                                new ResourceNotFoundException(
-                                        "Atención no encontrada"
-                                )
-                        );
+        HistorialClinico historialClinico = historialClinicoRepository
+                .findById(dto.getIdHistorialClinico())
+                .orElseThrow(() -> new ResourceNotFoundException("Historial clínico no encontrado"));
+
+        UsuarioVeterinario veterinario = usuarioVeterinarioRepository
+                .findById(dto.getIdVeterinario())
+                .orElseThrow(() -> new ResourceNotFoundException("Veterinario no encontrado"));
+
 
         Vacunacion vacunacion = Vacunacion.builder()
                 .mascota(mascota)
                 .vacuna(vacuna)
-                .atencion(atencion)
+                .veterinario(veterinario)
+                .historialClinico(historialClinico)
                 .fechaAplicacion(dto.getFechaAplicacion())
                 .proximaDosis(dto.getProximaDosis())
+                .lote(dto.getLote())
                 .build();
 
-        return vacunacionRepository.save(vacunacion);
+        Vacunacion guardada = vacunacionRepository.save(vacunacion);
+
+        /*
+         * MAPEO A RESPONSE DTO
+         */
+        return VacunacionMapper.toDto(vacunacionRepository.save(vacunacion));
     }
 }

@@ -1,5 +1,6 @@
 package com.petvission.servicio.dto;
 
+import com.petvission.servicio.model.CategoriaServicio;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -16,8 +17,8 @@ public class ServicioRequestDto {
     private String nombre;
 
     /* Categoría del servicio */
-    @NotBlank(message = "La categoría es obligatoria")
-    private String categoria;
+    @NotNull(message = "La categoría es obligatoria")
+    private CategoriaServicio categoria;
 
     /* Descripción del servicio */
     @NotBlank(message = "La descripción es obligatoria")

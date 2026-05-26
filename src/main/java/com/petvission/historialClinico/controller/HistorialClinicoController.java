@@ -1,7 +1,8 @@
-package com.petvission.atencion.controller;
+package com.petvission.historialClinico.controller;
 
-import com.petvission.atencion.dto.HistorialClinicoRequestDto;
-import com.petvission.atencion.service.HistorialClinicoService;
+import com.petvission.historialClinico.dto.HistorialClinicoRequestDto;
+import com.petvission.historialClinico.dto.HistorialClinicoResponseDto;
+import com.petvission.historialClinico.service.HistorialClinicoService;
 
 import com.petvission.shared.response.ApiResponse;
 
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/historial")
 @RequiredArgsConstructor
@@ -29,7 +32,7 @@ public class HistorialClinicoController {
      * REGISTRAR DIAGNÓSTICO
      */
     @PatchMapping("/{idHistorial}/diagnostico")
-    public ResponseEntity<ApiResponse<?>>
+    public ResponseEntity<ApiResponse<HistorialClinicoResponseDto>>
     registrarDiagnostico(
             @PathVariable Long idHistorial,
             @RequestBody String diagnostico
@@ -49,7 +52,7 @@ public class HistorialClinicoController {
      * REGISTRAR TRATAMIENTO
      */
     @PatchMapping("/{idHistorial}/tratamiento")
-    public ResponseEntity<ApiResponse<?>>
+    public ResponseEntity<ApiResponse<HistorialClinicoResponseDto>>
     registrarTratamiento(
             @PathVariable Long idHistorial,
             @RequestParam String tratamiento,
@@ -71,7 +74,7 @@ public class HistorialClinicoController {
      * REGISTRAR OBSERVACIÓN
      */
     @PostMapping
-    public ResponseEntity<ApiResponse<?>>
+    public ResponseEntity<ApiResponse<HistorialClinicoResponseDto>>
     registrarObservacion(
             @RequestBody HistorialClinicoRequestDto dto
     ) {
@@ -87,7 +90,7 @@ public class HistorialClinicoController {
      * OBTENER HISTORIAL MASCOTA
      */
     @GetMapping("/mascota/{idMascota}")
-    public ResponseEntity<ApiResponse<?>>
+    public ResponseEntity<ApiResponse<List<HistorialClinicoResponseDto>>>
     obtenerHistorialMascota(
             @PathVariable Long idMascota
     ) {

@@ -1,5 +1,3 @@
-// src/main/java/com/petvission/rol/model/Rol.java
-
 package com.petvission.usuario.model;
 
 import jakarta.persistence.*;

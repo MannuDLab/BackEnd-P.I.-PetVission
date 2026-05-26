@@ -1,6 +1,6 @@
-package com.petvission.atencion.repository;
+package com.petvission.historialClinico.repository;
 
-import com.petvission.atencion.model.Tratamiento;
+import com.petvission.historialClinico.model.Tratamiento;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

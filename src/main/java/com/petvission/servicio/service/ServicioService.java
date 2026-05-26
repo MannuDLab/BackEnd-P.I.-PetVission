@@ -3,6 +3,7 @@ package com.petvission.servicio.service;
 import com.petvission.servicio.dto.ServicioRequestDto;
 import com.petvission.servicio.dto.ServicioResponseDto;
 import com.petvission.servicio.mapper.ServicioMapper;
+import com.petvission.servicio.model.CategoriaServicio;
 import com.petvission.servicio.model.Servicio;
 import com.petvission.servicio.repository.ServicioRepository;
 import com.petvission.shared.exception.ResourceNotFoundException;
@@ -53,10 +54,9 @@ public class ServicioService {
     /*
      * OBTENER SERVICIOS POR CATEGORÍA
      */
-    public List<ServicioResponseDto> obtenerPorCategoria(
-            String categoria
-    ) {
-        return servicioRepository.findByCategoria(categoria)
+    public List<ServicioResponseDto> obtenerPorCategoria(String categoria) {
+        CategoriaServicio cat = CategoriaServicio.valueOf(categoria.toUpperCase());
+        return servicioRepository.findByCategoria(cat)
                 .stream()
                 .map(servicioMapper::toDto)
                 .toList();

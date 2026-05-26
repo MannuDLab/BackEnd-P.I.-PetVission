@@ -1,4 +1,4 @@
-package com.petvission.atencion.dto;
+package com.petvission.historialClinico.dto;
 
 import lombok.*;
 

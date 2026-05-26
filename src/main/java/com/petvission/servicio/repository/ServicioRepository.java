@@ -1,5 +1,6 @@
 package com.petvission.servicio.repository;
 
+import com.petvission.servicio.model.CategoriaServicio;
 import com.petvission.servicio.model.Servicio;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -12,5 +13,5 @@ public interface ServicioRepository
     List<Servicio> findByActivoTrue();
 
     /* Obtiene servicios filtrados por categoría */
-    List<Servicio> findByCategoria(String categoria);
+    List<Servicio> findByCategoria(CategoriaServicio categoria);
 }

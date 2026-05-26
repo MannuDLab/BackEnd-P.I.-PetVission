@@ -1,5 +1,6 @@
 package com.petvission.reserva.mapper;
 
+import com.petvission.reserva.dto.ReservaUsuarioDto;
 import org.springframework.stereotype.Component;
 
 import com.petvission.reserva.dto.ReservaResponseDto;
@@ -8,32 +9,47 @@ import com.petvission.reserva.model.Reserva;
 @Component
 public class ReservaMapper {
 
-    public ReservaResponseDto toDto(
-            Reserva reserva
-    ) {
+    /*
+     * RESERVA → RESPONSE DTO (para agendar)
+     */
+    public ReservaResponseDto toDto(Reserva reserva) {
 
         return ReservaResponseDto.builder()
-                .idReserva(
-                        reserva.getIdReserva()
+                .idReserva(reserva.getIdReserva())
+                .idUsuario(reserva.getUsuario().getIdUsuario())
+                .idVeterinario(reserva.getVeterinario().getIdUsuario())
+                .fecha(reserva.getFecha())
+                .hora(reserva.getHora())
+                .motivo(reserva.getMotivo())
+                .estado(reserva.getEstado())
+                .build();
+    }
+    /*
+     * RESERVA → USUARIO DTO (para listados)
+     */
+    public ReservaUsuarioDto toUsuarioDto(Reserva reserva) {
+
+        return ReservaUsuarioDto.builder()
+                .idReserva(reserva.getIdReserva())
+                .nombreCliente(
+                        reserva.getUsuario().getNombres()
+                                + " " +
+                                reserva.getUsuario().getApellidos()
                 )
-                .idUsuario(
-                        reserva.getUsuario().getIdUsuario()
+                .nombreVeterinario(
+                        reserva.getVeterinario().getUsuario().getNombres()
+                                + " " +
+                                reserva.getVeterinario().getUsuario().getApellidos()
                 )
-                .idVeterinario(
-                        reserva.getVeterinario().getIdUsuario()
+                .nombreMascota(
+                        reserva.getMascota() != null
+                                ? reserva.getMascota().getNombre()
+                                : null
                 )
-                .fecha(
-                        reserva.getFecha()
-                )
-                .hora(
-                        reserva.getHora()
-                )
-                .motivo(
-                        reserva.getMotivo()
-                )
-                .estado(
-                        reserva.getEstado()
-                )
+                .fecha(reserva.getFecha())
+                .hora(reserva.getHora())
+                .estado(reserva.getEstado())
+                .motivo(reserva.getMotivo())
                 .build();
     }
 }

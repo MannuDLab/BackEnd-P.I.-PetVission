@@ -1,4 +1,4 @@
-package com.petvission.atencion.model;
+package com.petvission.historialClinico.model;
 
 import jakarta.persistence.*;
 import lombok.*;

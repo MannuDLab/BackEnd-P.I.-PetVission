@@ -1,5 +1,6 @@
 package com.petvission.servicio.dto;
 
+import com.petvission.servicio.model.CategoriaServicio;
 import lombok.*;
 
 @Getter
@@ -16,7 +17,7 @@ public class ServicioResponseDto {
     private String nombre;
 
     /* Categoría del servicio */
-    private String categoria;
+    private CategoriaServicio categoria;
 
     /* Descripción del servicio */
     private String descripcion;

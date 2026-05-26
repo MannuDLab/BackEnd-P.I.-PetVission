@@ -1,11 +1,6 @@
 package com.petvission.vacunacion.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
+import lombok.*;
 import java.time.LocalDate;
 
 @Getter
@@ -19,9 +14,13 @@ public class VacunacionRequestDto {
 
     private Long idVacuna;
 
-    private Long idAtencion;
+    private Long idHistorialClinico;   // ← renombrado desde idAtencion
+
+    private Long idVeterinario;
 
     private LocalDate fechaAplicacion;
 
     private LocalDate proximaDosis;
+
+    private String lote;               // ← campo del modelo ER que faltaba
 }

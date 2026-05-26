@@ -2,7 +2,7 @@ package com.petvission.mascota.model;
 
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.petvission.atencion.model.HistorialClinico;
+import com.petvission.historialClinico.model.HistorialClinico;
 import com.petvission.usuario.model.Usuario;
 import jakarta.persistence.*;
 import lombok.*;
@@ -43,6 +43,14 @@ public class Mascota {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
+
+    @Column(name = "animal_guia", nullable = false)
+    @Builder.Default
+    private Boolean animalGuia = false;
+
+    @Column(name = "vacunas_al_dia", nullable = false)
+    @Builder.Default
+    private Boolean vacunasAlDia = false;
 
     /*
      * HISTORIAL CLINICO DE LA MASCOTA

@@ -8,9 +8,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class ServicioMapper {
 
-    /*
-     * Convierte un ServicioRequestDto a entidad Servicio
-     */
     public Servicio toEntity(ServicioRequestDto dto) {
         return Servicio.builder()
                 .nombre(dto.getNombre())
@@ -22,9 +19,6 @@ public class ServicioMapper {
                 .build();
     }
 
-    /*
-     * Convierte una entidad Servicio a ServicioResponseDto
-     */
     public ServicioResponseDto toDto(Servicio servicio) {
         return ServicioResponseDto.builder()
                 .idServicio(servicio.getIdServicio())

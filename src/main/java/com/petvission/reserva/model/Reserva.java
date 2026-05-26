@@ -2,12 +2,10 @@ package com.petvission.reserva.model;
 
 import jakarta.persistence.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+import com.petvission.mascota.model.Mascota;
+import com.petvission.servicio.model.Servicio;
 import com.petvission.usuario.model.Usuario;
 import com.petvission.usuario.model.UsuarioVeterinario;
 
@@ -16,7 +14,6 @@ import java.time.LocalTime;
 
 @Entity
 @Table(name = "reserva")
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -44,6 +41,20 @@ public class Reserva {
     private UsuarioVeterinario veterinario;
 
     /*
+     * SERVICIO
+     */
+    @ManyToOne
+    @JoinColumn(name = "id_servicio", nullable = false)
+    private Servicio servicio;
+
+    /*
+     * MASCOTA
+     */
+    @ManyToOne
+    @JoinColumn(name = "id_mascota")
+    private Mascota mascota;
+
+    /*
      * FECHA
      */
     @Column(name = "fecha", nullable = false)
@@ -60,6 +71,13 @@ public class Reserva {
      */
     @Column(name = "motivo")
     private String motivo;
+
+    /*
+     * OBSERVACIONES
+     */
+    @Column(name = "observaciones")
+    private String observaciones;
+
 
     /*
      * ESTADO

@@ -4,10 +4,13 @@ import com.petvission.horario.dto.HorarioRequestDto;
 import com.petvission.horario.dto.HorarioResponseDto;
 import com.petvission.horario.service.HorarioService;
 import com.petvission.shared.response.ApiResponse;
+
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,9 +23,10 @@ public class HorarioController {
     private final HorarioService horarioService;
 
     /*
-     * LISTAR TODOS LOS HORARIOS
+     * LISTAR TODOS LOS HORARIOS — ADMIN
      */
     @GetMapping
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     public ResponseEntity<ApiResponse<List<HorarioResponseDto>>> listarHorarios() {
         return ResponseEntity.ok(
                 ApiResponse.success(horarioService.obtenerHorarios())
@@ -30,9 +34,10 @@ public class HorarioController {
     }
 
     /*
-     * HORARIOS POR VETERINARIO
+     * HORARIOS POR VETERINARIO — ADMIN, VETERINARIO
      */
     @GetMapping("/veterinario/{idVeterinario}")
+    @PreAuthorize("hasRole('ADMINISTRADOR') or hasRole('VETERINARIO')")
     public ResponseEntity<ApiResponse<List<HorarioResponseDto>>> obtenerPorVeterinario(
             @PathVariable Long idVeterinario
     ) {
@@ -42,7 +47,7 @@ public class HorarioController {
     }
 
     /*
-     * HORARIOS DISPONIBLES POR VETERINARIO
+     * HORARIOS DISPONIBLES POR VETERINARIO — TODOS
      */
     @GetMapping("/veterinario/{idVeterinario}/disponibles")
     public ResponseEntity<ApiResponse<List<HorarioResponseDto>>> obtenerDisponibles(
@@ -54,9 +59,10 @@ public class HorarioController {
     }
 
     /*
-     * CREAR HORARIO
+     * CREAR HORARIO — SOLO ADMIN
      */
     @PostMapping
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     public ResponseEntity<ApiResponse<HorarioResponseDto>> crearHorario(
             @Valid @RequestBody HorarioRequestDto dto
     ) {
@@ -66,9 +72,10 @@ public class HorarioController {
     }
 
     /*
-     * DESACTIVAR HORARIO
+     * DESACTIVAR HORARIO — SOLO ADMIN
      */
     @PatchMapping("/{id}/desactivar")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     public ResponseEntity<ApiResponse<HorarioResponseDto>> desactivarHorario(
             @PathVariable Long id
     ) {

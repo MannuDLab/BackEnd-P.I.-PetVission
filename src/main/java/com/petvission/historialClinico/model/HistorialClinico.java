@@ -1,4 +1,4 @@
-package com.petvission.atencion.model;
+package com.petvission.historialClinico.model;
 
 import com.petvission.mascota.model.Mascota;
 import com.petvission.usuario.model.UsuarioVeterinario;

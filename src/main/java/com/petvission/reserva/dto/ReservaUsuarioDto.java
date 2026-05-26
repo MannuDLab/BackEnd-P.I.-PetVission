@@ -28,5 +28,7 @@ public class ReservaUsuarioDto {
 
     private EstadoReserva estado;
 
+    private String nombreMascota;
+
     private String motivo;
 }
